@@ -7,19 +7,22 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
 # Ensure NLTK data is downloaded (only need to do this once)
+import nltk
+
 try:
     nltk.data.find('corpora/stopwords')
-except nltk.downloader.DownloadError:
+except LookupError:
     nltk.download('stopwords')
+
 try:
     nltk.data.find('corpora/wordnet')
-except nltk.downloader.DownloadError:
+except LookupError:
     nltk.download('wordnet')
-try:
-    nltk.data.find('tokenizers/punkt') # Changed from punkt_tab to punkt for broader compatibility
-except nltk.downloader.DownloadError:
-    nltk.download('punkt')
 
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 # Load the model and vectorizer
 @st.cache_resource
 def load_artifacts():
